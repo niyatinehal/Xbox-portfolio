@@ -68,12 +68,9 @@ export default function ProjectsPage() {
         transition={{ ...transition, delay: 0.3 + index * 0.15 }}
         whileHover={{ 
           scale: 1.05,
-          rotateY: 5,
-          rotateX: 5,
           transition: { duration: 0.3 }
         }}
-        className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
-        style={{ perspective: '1000px' }}
+        className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer transform-gpu"
       >
         {/* Background Image */}
         <div className="absolute inset-0">
@@ -87,24 +84,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Glow Border */}
-        <div className="absolute inset-0 rounded-2xl border-2 border-lime-500/40 group-hover:border-lime-400 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-lime-400/50"></div>
-
-        {/* Floating Glow Effect */}
-        <motion.div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          animate={{
-            background: [
-              'radial-gradient(circle at 20% 20%, rgba(163, 230, 53, 0.1) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 80%, rgba(163, 230, 53, 0.1) 0%, transparent 50%)',
-              'radial-gradient(circle at 20% 20%, rgba(163, 230, 53, 0.1) 0%, transparent 50%)'
-            ]
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+        <div className="absolute inset-0 rounded-2xl border-2 border-lime-500/40 group-hover:border-lime-400 transition-colors duration-300 group-hover:shadow-lg group-hover:shadow-lime-400/50"></div>
 
         {/* Content */}
         <div className="relative h-full flex flex-col justify-between p-6 text-white">
@@ -238,7 +218,7 @@ export default function ProjectsPage() {
 
       {/* Cursor Following Glow */}
       <motion.div
-        className="fixed w-8 h-8 bg-lime-400/30 rounded-full blur-xl pointer-events-none z-50"
+        className="fixed w-8 h-8 bg-lime-400/20 rounded-full blur-xl pointer-events-none z-10"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
