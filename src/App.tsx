@@ -5,6 +5,7 @@ import Header from './components/Header';
 import WelcomeSection from './components/WelcomeSection';
 import TileCard from './components/TileCard';
 import BackgroundEffects from './components/BackgroundEffects';
+import Footer from './components/Footer';
 import { User, FolderOpen, Settings } from 'lucide-react';
 
 // Import pages
@@ -99,6 +100,8 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
+        
+        <Footer />
       </div>
     </div>
   );
