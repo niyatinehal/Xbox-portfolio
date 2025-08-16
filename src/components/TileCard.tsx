@@ -6,7 +6,7 @@ import { DivideIcon as LucideIcon } from 'lucide-react';
 interface TileCardProps {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   link: string;
   index: number;
 }

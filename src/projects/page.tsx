@@ -4,40 +4,121 @@ import { Link } from 'react-router-dom';
 import { FolderOpen, ExternalLink, Play, Star, Clock, Settings, Search, Volume2 } from 'lucide-react';
 
 const projects = [
-  {
-    title: 'K-Verse',
-    description: 'A full-stack social media app',
-    tags: ['React', 'Tailwind', 'CRUD'],
-    link: 'https://k-verse-connect.netlify.app/',
-    isExternal: true,
-    coverImage: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=400',
-    gradient: 'from-purple-600 to-blue-600',
-    rating: 5
-  },
-  {
-    title: 'Bookshala',
-    description: 'E-commerce app for books',
-    tags: ['React', 'Cart', 'Filter'],
-    link: 'https://bookshalaa-library.netlify.app/',
-    isExternal: true,
-    coverImage: 'https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=400',
-    gradient: 'from-orange-600 to-red-600',
-    rating: 4
-  },
-  {
-    title: 'Profile',
-    description: 'Know more about me',
-    tags: ['Bio', 'Skills', 'Achievements'],
-    link: '/profile',
-    isExternal: false,
-    coverImage: 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=400',
-    gradient: 'from-lime-600 to-green-600',
-    rating: 5
-  }
+    {
+        title: 'K-Verse',
+        description: 'A full-stack social media app',
+        tags: ['React', 'Tailwind', 'CRUD'],
+        link: 'https://k-verse-connect.netlify.app/',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-purple-600 to-blue-600',
+        rating: 5
+    },
+    {
+        title: 'Bookshala',
+        description: 'E-commerce app for books',
+        tags: ['React', 'Cart', 'Filter'],
+        link: 'https://bookshalaa-library.netlify.app/',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/46274/pexels-photo-46274.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-orange-600 to-red-600',
+        rating: 4
+    },
+    {
+        title: 'MiniGit',
+        description: 'A Python implementation of Git (SHA‑1 objects, commit history, log functionality)',
+        tags: ['Python', 'CLI', 'Version Control', 'Data Structures'],
+        link: 'https://github.com/niyatinehal/minigit',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-gray-800 to-gray-600',
+        rating: 5
+    },
+    {
+        title: 'Urban‑Clap Clone',
+        description: 'Service marketplace clone using vanilla JS, HTML & CSS',
+        tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+        link: 'https://urban-clap-company-clone.netlify.app/',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/3825588/pexels-photo-3825588.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-blue-600 to-indigo-600',
+        rating: 4
+    },
+    {
+        title: 'Stock Profit Calculator',
+        description: 'Web app to compute max profit/loss from stock prices over time',
+        tags: ['JavaScript', 'React', 'Algorithm'],
+        link: 'https://niyati-profit-or-loss.netlify.app/',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/4386396/pexels-photo-4386396.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-green-600 to-teal-600',
+        rating: 4
+    },
+    {
+        title: 'Palindrome Birthdate Checker',
+        description: 'Check if your birthdate is a palindrome in different formats',
+        tags: ['JavaScript', 'Date', 'Logic'],
+        link: 'https://github.com/niyatinehal/is-your-birthdate-a-palindrome',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-pink-600 to-purple-600',
+        rating: 4
+    },
+    {
+        title: 'Triangle Quiz Game',
+        description: 'Interactive quiz to test your geometry knowledge',
+        tags: ['JavaScript', 'HTML', 'CSS', 'Quiz'],
+        link: 'https://fun-with-triangle-niyati.netlify.app/istriangle',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-yellow-600 to-orange-600',
+        rating: 3
+    },
+    {
+        title: 'Lucky Birthday Checker',
+        description: 'Discover if your birthday is “lucky” based on numerology',
+        tags: ['JavaScript', 'Fun', 'Date', 'Logic'],
+        link: 'https://is-your-birthday-lucky-niyati.netlify.app/',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-red-600 to-pink-600',
+        rating: 3
+    },
+    {
+        title: 'Cash Register Simulator',
+        description: 'Calculates change and simulates cashier transactions',
+        tags: ['JavaScript', 'Calculator', 'UI'],
+        link: 'https://niyati-cash-register.netlify.app/',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/267614/pexels-photo-267614.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-blue-500 to-green-500',
+        rating: 3
+    },
+    {
+        title: 'K‑Drama Recommendation App',
+        description: 'Suggests K‑dramas based on genre and ratings',
+        tags: ['JavaScript', 'React', 'API', 'Fetch'],
+        link: 'https://ierml6.csb.app/',
+        isExternal: true,
+        coverImage: 'https://images.pexels.com/photos/4004374/pexels-photo-4004374.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-purple-500 to-pink-500',
+        rating: 3
+    },
+    {
+        title: 'Profile',
+        description: 'Know more about me',
+        tags: ['Bio', 'Skills', 'Achievements'],
+        link: '/profile',
+        isExternal: false,
+        coverImage: 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=600',
+        gradient: 'from-lime-600 to-green-600',
+        rating: 5
+    }
 ];
 
+
 export default function ProjectsPage() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+//   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   
   // Smooth cursor following
@@ -47,16 +128,16 @@ export default function ProjectsPage() {
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
-  useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
-    };
+    useEffect(() => {
+        const updateMousePosition = (e: MouseEvent) => {
+            cursorX.set(e.clientX - 16);
+            cursorY.set(e.clientY - 16);
+        };
 
-    window.addEventListener('mousemove', updateMousePosition);
-    return () => window.removeEventListener('mousemove', updateMousePosition);
-  }, [cursorX, cursorY]);
+        window.addEventListener('mousemove', updateMousePosition);
+        return () => window.removeEventListener('mousemove', updateMousePosition);
+    }, [cursorX, cursorY]);
+
 
   const transition = { type: 'spring', stiffness: 300, damping: 25 };
 
@@ -65,6 +146,7 @@ export default function ProjectsPage() {
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
+        //@ts-ignore
         transition={{ ...transition, delay: 0.3 + index * 0.15 }}
         whileHover={{ 
           scale: 1.05,
@@ -226,36 +308,7 @@ export default function ProjectsPage() {
       />
 
       {/* Xbox-style Header */}
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 w-full px-8 py-6 bg-gray-900/30 backdrop-blur-md border-b border-gray-700/50"
-      >
-        <div className="flex justify-between items-center">
-          {/* Left - Back to Dashboard */}
-          <Link to="/" className="flex items-center space-x-3 text-lime-400 hover:text-lime-300 transition-colors">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-lime-400 to-green-500 flex items-center justify-center text-black font-bold text-sm">
-              NN
-            </div>
-            <span className="font-semibold">Back to Dashboard</span>
-          </Link>
 
-          {/* Right - Xbox Controls */}
-          <div className="flex items-center space-x-6">
-            <span className="text-white font-mono text-lg">{currentTime}</span>
-            <button className="text-gray-400 hover:text-lime-400 transition-colors p-2 rounded-lg hover:bg-gray-800/50">
-              <Volume2 size={20} />
-            </button>
-            <button className="text-gray-400 hover:text-lime-400 transition-colors p-2 rounded-lg hover:bg-gray-800/50">
-              <Settings size={20} />
-            </button>
-            <button className="text-gray-400 hover:text-lime-400 transition-colors p-2 rounded-lg hover:bg-gray-800/50">
-              <Search size={20} />
-            </button>
-          </div>
-        </div>
-      </motion.header>
 
       {/* Main Content */}
       <div className="relative z-10 px-8 py-12">
@@ -263,6 +316,7 @@ export default function ProjectsPage() {
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
+          //@ts-ignore
           transition={{ ...transition, delay: 0.1 }}
           className="flex items-center space-x-4 mb-12"
         >
@@ -281,6 +335,7 @@ export default function ProjectsPage() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          //@ts-ignore
           transition={{ ...transition, delay: 0.2 }}
           className="text-xl text-gray-300 mb-12 max-w-2xl"
         >
@@ -299,6 +354,7 @@ export default function ProjectsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          //@ts-ignore
           transition={{ ...transition, delay: 1 }}
           className="mt-16 text-center"
         >
