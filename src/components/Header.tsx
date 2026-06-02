@@ -9,6 +9,7 @@ const SEARCH_ITEMS = [
   { label: 'Settings', description: 'Contact info & links', href: '/settings' },
 ];
 
+// Replace with your real SoundCloud track/playlist URL
 const SOUNDCLOUD_URL =
   'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/placeholder&color=%23a3e635&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
 
@@ -72,12 +73,13 @@ const Header = () => {
             <button
               onClick={() => setMusicOpen((o) => !o)}
               title="Music Player"
-              className={`transition-colors p-2 rounded-lg ${
+              className={`transition-all p-2 rounded-lg ${
                 musicOpen
                   ? 'text-black bg-lime-400'
                   : 'text-gray-400 hover:text-lime-400 hover:bg-gray-800/50'
               }`}
             >
+              {/* icon reflects mute state — setMuted lives inside the drawer (Task 2) */}
               {muted ? <VolumeX size={24} /> : <Volume2 size={24} />}
             </button>
 
