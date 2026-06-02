@@ -156,6 +156,14 @@ const Header = () => {
         </AnimatePresence>
       </motion.header>
 
+      {/* Click-outside overlay — closes music drawer */}
+      {musicOpen && (
+        <div
+          className="fixed inset-0 z-30"
+          onClick={() => setMusicOpen(false)}
+        />
+      )}
+
       {/* Search overlay */}
       <AnimatePresence>
         {searchOpen && (
