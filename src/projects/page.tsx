@@ -165,7 +165,7 @@ export default function ProjectsPage() {
               className="h-full flex flex-col"
             >
               {/* Cover area — browser chrome + screenshot */}
-              <div className={`relative h-72 bg-gradient-to-br ${project.gradient} flex-shrink-0 flex flex-col`}>
+              <div className={`relative h-[420px] bg-gradient-to-br ${project.gradient} flex-shrink-0 flex flex-col`}>
                 {/* Browser chrome bar */}
                 <div className="flex items-center gap-2 px-4 py-2.5 bg-black/50 backdrop-blur-sm border-b border-white/[0.08] flex-shrink-0 z-10">
                   <div className="flex gap-1.5">
