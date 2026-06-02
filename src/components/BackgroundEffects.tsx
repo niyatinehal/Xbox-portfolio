@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface Particle {
@@ -25,8 +25,8 @@ const BackgroundEffects = () => {
       cursorX.set(e.clientX - 200);
       cursorY.set(e.clientY - 200);
     };
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
+    globalThis.addEventListener('mousemove', move);
+    return () => globalThis.removeEventListener('mousemove', move);
   }, []);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const BackgroundEffects = () => {
           continue;
         }
 
-        const size = 3 * (1 - p.age);
+        const size = 6 * (1 - p.age);
         const opacity = 0.8 * (1 - p.age);
 
         ctx.save();
