@@ -20,6 +20,15 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
 
+  React.useEffect(() => {
+    if (!musicOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMusicOpen(false);
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [musicOpen]);
+
   const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   const filtered = SEARCH_ITEMS.filter(
@@ -73,7 +82,8 @@ const Header = () => {
             <button
               onClick={() => setMusicOpen((o) => !o)}
               title="Music Player"
-              className={`transition-all p-2 rounded-lg ${
+              aria-expanded={musicOpen}
+              className={`transition-colors p-2 rounded-lg ${
                 musicOpen
                   ? 'text-black bg-lime-400'
                   : 'text-gray-400 hover:text-lime-400 hover:bg-gray-800/50'
@@ -133,8 +143,9 @@ const Header = () => {
                 <iframe
                   title="Music Player"
                   width="100%"
-                  height="120"
+                  height={120}
                   allow="autoplay"
+                  sandbox="allow-scripts allow-same-origin allow-popups"
                   src={SOUNDCLOUD_URL}
                   className="rounded-lg"
                   style={{ border: 'none' }}
