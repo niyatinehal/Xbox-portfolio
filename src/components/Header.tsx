@@ -136,7 +136,7 @@ const Header = () => {
                       setMuted(next);
                       soundCloudRef.current?.contentWindow?.postMessage(
                         JSON.stringify({ method: 'setVolume', value: next ? 0 : 100 }),
-                        '*'
+                        'https://w.soundcloud.com'
                       );
                     }}
                     className="text-gray-400 hover:text-lime-400 transition-colors"
