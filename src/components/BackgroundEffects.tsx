@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface Particle {
   x: number;
@@ -13,6 +14,20 @@ const MAX_PARTICLES = 50;
 
 const BackgroundEffects = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const cursorX = useMotionValue(-600);
+  const cursorY = useMotionValue(-600);
+  const x = useSpring(cursorX, { damping: 28, stiffness: 120 });
+  const y = useSpring(cursorY, { damping: 28, stiffness: 120 });
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => {
+      cursorX.set(e.clientX - 200);
+      cursorY.set(e.clientY - 200);
+    };
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -114,6 +129,19 @@ const BackgroundEffects = () => {
         className="absolute inset-0"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(163,230,53,0.15) 0%, transparent 65%)',
+        }}
+      />
+
+      {/* Pointer bubble */}
+      <motion.div
+        className="fixed pointer-events-none rounded-full"
+        style={{
+          x,
+          y,
+          width: 400,
+          height: 400,
+          background: 'radial-gradient(circle, rgba(163,230,53,0.13) 0%, transparent 70%)',
+          zIndex: 10,
         }}
       />
 
