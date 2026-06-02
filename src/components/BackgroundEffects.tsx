@@ -1,6 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  age: number;
+}
+
+const AGE_STEP = 1 / (500 / 16); // ~0.032 per frame at 60fps
+const MAX_PARTICLES = 50;
+
 const BackgroundEffects = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -15,6 +26,68 @@ const BackgroundEffects = () => {
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
   }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const particles: Particle[] = [];
+    let rafId = 0;
+
+    const spawnParticle = (x: number, y: number) => {
+      if (particles.length >= MAX_PARTICLES) particles.shift();
+      particles.push({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        age: 0,
+      });
+    };
+
+    const handleMouseMove = (e: MouseEvent) => spawnParticle(e.clientX, e.clientY);
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.age += AGE_STEP;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.age >= 1) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        const size = 3 * (1 - p.age);
+        const opacity = 0.8 * (1 - p.age);
+
+        ctx.save();
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'rgba(163, 230, 53, 0.6)';
+        ctx.fillStyle = `rgba(163, 230, 53, ${opacity})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      rafId = requestAnimationFrame(draw);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    rafId = requestAnimationFrame(draw);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
       {/* Gradient Background */}
