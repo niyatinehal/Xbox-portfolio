@@ -52,9 +52,12 @@ const WelcomeSection = () => {
         }}
         className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
       >
-        <span className="px-6 py-3 bg-gradient-to-r from-lime-400 to-green-500 text-black font-bold rounded-lg shadow-lg shadow-lime-400/30 text-lg">
+        <button
+          onClick={() => document.getElementById('tiles')?.scrollIntoView({ behavior: 'smooth' })}
+          className="px-6 py-3 bg-gradient-to-r from-lime-400 to-green-500 text-black font-bold rounded-lg shadow-lg shadow-lime-400/30 hover:shadow-lime-400/60 hover:scale-105 active:scale-95 transition-all duration-200 text-lg cursor-pointer"
+        >
           Ready to Explore
-        </span>
+        </button>
 
         <a
           href="https://topmate.io/niyati_nehal/1604225"

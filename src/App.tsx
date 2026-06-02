@@ -50,6 +50,7 @@ function App() {
               <main className="px-8 py-12">
                 <WelcomeSection />
                 <motion.section
+                  id="tiles"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 1.2 }}
