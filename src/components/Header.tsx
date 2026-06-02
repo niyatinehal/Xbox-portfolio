@@ -102,6 +102,47 @@ const Header = () => {
             </button>
           </motion.div>
         </div>
+
+        {/* Music player drawer */}
+        <AnimatePresence>
+          {musicOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8, scaleY: 0.95 }}
+              animate={{ opacity: 1, y: 0, scaleY: 1 }}
+              exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+              style={{ transformOrigin: 'top right' }}
+              className="absolute right-8 top-full w-80 bg-[#1a1a1a] border border-lime-400 border-t-0 rounded-b-xl shadow-[0_8px_32px_rgba(163,230,53,0.15)] overflow-hidden z-50"
+            >
+              {/* Drawer header row */}
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-800">
+                <span className="text-lime-400 text-xs font-semibold tracking-widest">♪ NOW PLAYING</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-gray-500 text-xs">Mute</span>
+                  <button
+                    onClick={() => setMuted((m) => !m)}
+                    className="text-gray-400 hover:text-lime-400 transition-colors"
+                    title={muted ? 'Unmute' : 'Mute'}
+                  >
+                    {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                  </button>
+                </div>
+              </div>
+              {/* SoundCloud embed */}
+              <div className="p-3">
+                <iframe
+                  title="Music Player"
+                  width="100%"
+                  height="120"
+                  allow="autoplay"
+                  src={SOUNDCLOUD_URL}
+                  className="rounded-lg"
+                  style={{ border: 'none' }}
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.header>
 
       {/* Search overlay */}
