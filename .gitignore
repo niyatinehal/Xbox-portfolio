@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Verification screenshots and brainstorm sessions
+verify-*.png
+.superpowers/
+.playwright-mcp/
