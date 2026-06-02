@@ -9,9 +9,13 @@ const SEARCH_ITEMS = [
   { label: 'Settings', description: 'Contact info & links', href: '/settings' },
 ];
 
+const SOUNDCLOUD_URL =
+  'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/placeholder&color=%23a3e635&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
+
 const Header = () => {
   const navigate = useNavigate();
   const [muted, setMuted] = useState(false);
+  const [musicOpen, setMusicOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -35,7 +39,7 @@ const Header = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="w-full px-8 py-6"
+        className="w-full px-8 py-6 relative z-40"
       >
         <div className="flex justify-between items-center">
           {/* Left - Profile */}
@@ -43,7 +47,8 @@ const Header = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center space-x-4"
+            className="flex items-center space-x-4 cursor-pointer"
+            onClick={() => navigate('/')}
           >
             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-lime-400 to-green-500 flex items-center justify-center text-black font-bold text-xl shadow-lg shadow-lime-400/30">
               NN
@@ -65,9 +70,13 @@ const Header = () => {
 
             {/* Volume toggle */}
             <button
-              onClick={() => setMuted((m) => !m)}
-              title={muted ? 'Unmute' : 'Mute'}
-              className="text-gray-400 hover:text-lime-400 transition-colors p-2 rounded-lg hover:bg-gray-800/50"
+              onClick={() => setMusicOpen((o) => !o)}
+              title="Music Player"
+              className={`transition-colors p-2 rounded-lg ${
+                musicOpen
+                  ? 'text-black bg-lime-400'
+                  : 'text-gray-400 hover:text-lime-400 hover:bg-gray-800/50'
+              }`}
             >
               {muted ? <VolumeX size={24} /> : <Volume2 size={24} />}
             </button>
