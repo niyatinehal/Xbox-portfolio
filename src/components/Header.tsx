@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Settings, Search, Volume2, VolumeX, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -19,8 +19,9 @@ const Header = () => {
   const [musicOpen, setMusicOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const soundCloudRef = useRef<HTMLIFrameElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!musicOpen) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMusicOpen(false);
@@ -90,7 +91,6 @@ const Header = () => {
                   : 'text-gray-400 hover:text-lime-400 hover:bg-gray-800/50'
               }`}
             >
-              {/* icon reflects mute state — setMuted lives inside the drawer (Task 2) */}
               {muted ? <VolumeX size={24} /> : <Volume2 size={24} />}
             </button>
 
@@ -132,7 +132,14 @@ const Header = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-gray-500 text-xs">Mute</span>
                   <button
-                    onClick={() => setMuted((m) => !m)}
+                    onClick={() => {
+                      const next = !muted;
+                      setMuted(next);
+                      soundCloudRef.current?.contentWindow?.postMessage(
+                        JSON.stringify({ method: 'setVolume', value: next ? 0 : 100 }),
+                        '*'
+                      );
+                    }}
                     className="text-gray-400 hover:text-lime-400 transition-colors"
                     title={muted ? 'Unmute' : 'Mute'}
                   >
@@ -147,7 +154,8 @@ const Header = () => {
                   width="100%"
                   height={120}
                   allow="autoplay"
-                  sandbox="allow-scripts allow-same-origin allow-popups"
+                  sandbox="allow-scripts allow-same-origin"
+                  ref={soundCloudRef}
                   src={SOUNDCLOUD_URL}
                   className="rounded-lg"
                   style={{ border: 'none' }}
