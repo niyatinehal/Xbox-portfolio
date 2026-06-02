@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { GraduationCap, MapPin, Mail, User, Code, Star } from 'lucide-react';
+import { GraduationCap, MapPin, Mail, User, Code, Star, Briefcase } from 'lucide-react';
 
 export default function ProfilePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -163,9 +163,17 @@ export default function ProfilePage() {
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ ...transition, delay: 0.6 }}
-                    className="text-xl text-gray-300 font-semibold mb-4"
+                    className="text-xl text-gray-300 font-semibold mb-1"
                   >
-                    Level 2 Fullstack Explorer
+                    Fullstack Developer
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ ...transition, delay: 0.65 }}
+                    className="text-sm text-lime-400/80 mb-4"
+                  >
+                    The right developer for SaaS Founders &amp; Coaches
                   </motion.p>
 
                   {/* XP Bar */}
@@ -203,8 +211,9 @@ export default function ProfilePage() {
                   About Me
                 </h2>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  Niyati is a mission-driven full-stack developer who crafts interactive frontends and powerful backends. 
-                  Finalist of the Smart India Hackathon, she's ready for her next co-op adventure at Microsoft.
+                  2 years of fullstack experience building production-ready Next.js frontends. Specializes in
+                  Next.js dashboards, client portals, and SaaS landing pages — all TypeScript, deployed to Vercel,
+                  fixed price and fixed timeline. Smart India Hackathon Finalist. Available for freelance and full-time opportunities.
                 </p>
               </motion.div>
 
@@ -288,24 +297,86 @@ export default function ProfilePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...transition, delay: 1.3 }}
-                className="border-t border-gray-700/50 pt-6"
+                className="border-t border-gray-700/50 pt-6 mb-8"
               >
                 <h2 className="text-xl font-bold text-lime-400 mb-4 flex items-center gap-2">
                   <Code className="w-5 h-5" />
                   Tech Stack
                 </h2>
                 <div className="flex flex-wrap gap-3">
-                  {['React', 'Next.js', 'Node.js', 'MongoDB', 'Tailwind CSS', 'TypeScript', 'Express', 'Socket.io'].map((tech, index) => (
+                  {['Next.js 15', 'React.js', 'TypeScript', 'Node.js', 'Express.js', 'PostgreSQL', 'MongoDB', 'Drizzle ORM', 'TanStack Query', 'Tailwind CSS', 'WebSocket', 'Three.js', 'Redux', 'Recharts', 'Turborepo', 'Vercel'].map((tech, index) => (
                     <motion.span
                       key={tech}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ ...transition, delay: 1.4 + index * 0.1 }}
+                      transition={{ ...transition, delay: 1.4 + index * 0.05 }}
                       whileHover={{ scale: 1.1, y: -2 }}
                       className="px-4 py-2 bg-lime-400/10 border border-lime-400/30 rounded-full text-lime-300 text-sm font-medium hover:bg-lime-400/20 hover:border-lime-400/50 transition-all duration-300"
                     >
                       {tech}
                     </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Work Experience */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...transition, delay: 1.5 }}
+                className="border-t border-gray-700/50 pt-6"
+              >
+                <h2 className="text-xl font-bold text-lime-400 mb-6 flex items-center gap-2">
+                  <Briefcase className="w-5 h-5" />
+                  Work Experience
+                </h2>
+                <div className="space-y-4">
+                  {[
+                    {
+                      role: 'Full-stack Developer',
+                      company: 'CodeDecoders',
+                      period: 'Oct 2025 – Present',
+                      location: 'Ahmedabad, Gujarat · On-site',
+                      details: 'Building full-stack SaaS apps with Next.js 15 and TanStack Query; delivering production-ready TypeScript frontends to Vercel; developing client portals and dashboards.',
+                    },
+                    {
+                      role: 'Software Development Engineer',
+                      company: 'Greendzine Technologies Pvt. Ltd.',
+                      period: 'May 2024 – May 2025',
+                      location: 'Bangalore, Karnataka · On-site',
+                      details: 'Led React.js frontend development for internal dashboards; integrated JSON-based REST APIs; improved component architecture; participated in code reviews.',
+                    },
+                    {
+                      role: 'SDE Intern',
+                      company: 'Greendzine Technologies Pvt. Ltd.',
+                      period: 'Aug 2023 – Apr 2024',
+                      location: 'Bengaluru, Karnataka · On-site',
+                      details: 'Built responsive UI components with HTML, CSS, React.js; delivered features in sprint cycles; contributed to production codebase from month one.',
+                    },
+                    {
+                      role: 'Web Development Intern',
+                      company: 'Your Jinnie',
+                      period: 'Nov 2022 – May 2023',
+                      location: 'India · Remote',
+                      details: 'Built interactive web interfaces; developed frontend components; gained hands-on React.js experience in an early-stage startup.',
+                    },
+                  ].map((job, index) => (
+                    <motion.div
+                      key={job.company + job.role}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ ...transition, delay: 1.6 + index * 0.1 }}
+                      whileHover={{ scale: 1.01, x: 4 }}
+                      className="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 hover:border-lime-400/50 transition-all duration-300"
+                    >
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-2">
+                        <h3 className="text-lime-300 font-semibold">{job.role}</h3>
+                        <span className="text-gray-400 text-xs">{job.period}</span>
+                      </div>
+                      <p className="text-gray-300 text-sm font-medium mb-1">{job.company}</p>
+                      <p className="text-gray-500 text-xs mb-2">{job.location}</p>
+                      <p className="text-gray-400 text-sm leading-relaxed">{job.details}</p>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
