@@ -19,8 +19,13 @@ const BackgroundEffects = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      const ctx = canvas.getContext('2d');
+      if (ctx) ctx.scale(dpr, dpr);
     };
     resize();
     window.addEventListener('resize', resize);
@@ -149,8 +154,8 @@ const BackgroundEffects = () => {
 
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ zIndex: 1 }}
+        className="fixed inset-0 pointer-events-none"
+        style={{ zIndex: 20 }}
       />
     </div>
   );
