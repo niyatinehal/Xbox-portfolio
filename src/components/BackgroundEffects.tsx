@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const BackgroundEffects = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
       {/* Gradient Background */}
@@ -50,7 +63,7 @@ const BackgroundEffects = () => {
       />
       
       {/* Subtle grid pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: `
@@ -59,6 +72,12 @@ const BackgroundEffects = () => {
           `,
           backgroundSize: '50px 50px'
         }}
+      />
+
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 1 }}
       />
     </div>
   );
