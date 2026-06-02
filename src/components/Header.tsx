@@ -9,9 +9,8 @@ const SEARCH_ITEMS = [
   { label: 'Settings', description: 'Contact info & links', href: '/settings' },
 ];
 
-// Replace with your real SoundCloud track/playlist URL
 const SOUNDCLOUD_URL =
-  'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/placeholder&color=%23a3e635&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
+  'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/steveburke/xbox-360-dashboard-avatars-1&color=%23a3e635&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
 
 const Header = () => {
   const navigate = useNavigate();
