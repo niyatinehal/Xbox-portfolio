@@ -83,6 +83,7 @@ const Header = () => {
               onClick={() => setMusicOpen((o) => !o)}
               title="Music Player"
               aria-expanded={musicOpen}
+              aria-controls="music-drawer"
               className={`transition-colors p-2 rounded-lg ${
                 musicOpen
                   ? 'text-black bg-lime-400'
@@ -117,6 +118,7 @@ const Header = () => {
         <AnimatePresence>
           {musicOpen && (
             <motion.div
+              id="music-drawer"
               initial={{ opacity: 0, y: -8, scaleY: 0.95 }}
               animate={{ opacity: 1, y: 0, scaleY: 1 }}
               exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
@@ -159,7 +161,8 @@ const Header = () => {
       {/* Click-outside overlay — closes music drawer */}
       {musicOpen && (
         <div
-          className="fixed inset-0 z-30"
+          aria-hidden="true"
+          className="fixed inset-0 z-30 cursor-default"
           onClick={() => setMusicOpen(false)}
         />
       )}
