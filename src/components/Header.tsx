@@ -10,7 +10,7 @@ const SEARCH_ITEMS = [
 ];
 
 const SOUNDCLOUD_URL =
-  'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/steveburke/xbox-360-dashboard-avatars-1&color=%23a3e635&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
+  'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/steveburke/xbox-360-dashboard-avatars-1&color=%23a3e635&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -113,56 +113,55 @@ const Header = () => {
           </motion.div>
         </div>
 
-        {/* Music player drawer */}
-        <AnimatePresence>
-          {musicOpen && (
-            <motion.div
-              id="music-drawer"
-              initial={{ opacity: 0, y: -8, scaleY: 0.95 }}
-              animate={{ opacity: 1, y: 0, scaleY: 1 }}
-              exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-              style={{ transformOrigin: 'top right' }}
-              className="absolute right-8 top-full w-80 bg-[#1a1a1a] border border-lime-400 border-t-0 rounded-b-xl shadow-[0_8px_32px_rgba(163,230,53,0.15)] overflow-hidden z-50"
-            >
-              {/* Drawer header row */}
-              <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-800">
-                <span className="text-lime-400 text-xs font-semibold tracking-widest">♪ NOW PLAYING</span>
-                <div className="flex items-center gap-3">
-                  <span className="text-gray-500 text-xs">Mute</span>
-                  <button
-                    onClick={() => {
-                      const next = !muted;
-                      setMuted(next);
-                      soundCloudRef.current?.contentWindow?.postMessage(
-                        JSON.stringify({ method: 'setVolume', value: next ? 0 : 100 }),
-                        'https://w.soundcloud.com'
-                      );
-                    }}
-                    className="text-gray-400 hover:text-lime-400 transition-colors"
-                    title={muted ? 'Unmute' : 'Mute'}
-                  >
-                    {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                  </button>
-                </div>
-              </div>
-              {/* SoundCloud embed */}
-              <div className="p-3">
-                <iframe
-                  title="Music Player"
-                  width="100%"
-                  height={120}
-                  allow="autoplay"
-                  sandbox="allow-scripts allow-same-origin"
-                  ref={soundCloudRef}
-                  src={SOUNDCLOUD_URL}
-                  className="rounded-lg"
-                  style={{ border: 'none' }}
-                />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Music player drawer — always mounted so audio plays on load */}
+        <motion.div
+          id="music-drawer"
+          initial={false}
+          animate={musicOpen
+            ? { opacity: 1, scaleY: 1, height: 'auto' }
+            : { opacity: 0, scaleY: 0.95, height: 0 }
+          }
+          transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+          style={{ transformOrigin: 'top right', overflow: 'hidden', pointerEvents: musicOpen ? 'auto' : 'none' }}
+          aria-hidden={!musicOpen}
+          className="absolute right-8 top-full w-80 bg-[#1a1a1a] border border-lime-400 border-t-0 rounded-b-xl shadow-[0_8px_32px_rgba(163,230,53,0.15)] z-50"
+        >
+          {/* Drawer header row */}
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-800">
+            <span className="text-lime-400 text-xs font-semibold tracking-widest">♪ NOW PLAYING</span>
+            <div className="flex items-center gap-3">
+              <span className="text-gray-500 text-xs">Mute</span>
+              <button
+                onClick={() => {
+                  const next = !muted;
+                  setMuted(next);
+                  soundCloudRef.current?.contentWindow?.postMessage(
+                    JSON.stringify({ method: 'setVolume', value: next ? 0 : 100 }),
+                    'https://w.soundcloud.com'
+                  );
+                }}
+                className="text-gray-400 hover:text-lime-400 transition-colors"
+                title={muted ? 'Unmute' : 'Mute'}
+              >
+                {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              </button>
+            </div>
+          </div>
+          {/* SoundCloud embed */}
+          <div className="p-3">
+            <iframe
+              title="Music Player"
+              width="100%"
+              height={120}
+              allow="autoplay"
+              sandbox="allow-scripts allow-same-origin"
+              ref={soundCloudRef}
+              src={SOUNDCLOUD_URL}
+              className="rounded-lg"
+              style={{ border: 'none' }}
+            />
+          </div>
+        </motion.div>
       </motion.header>
 
       {/* Click-outside overlay — closes music drawer */}
