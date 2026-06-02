@@ -14,6 +14,7 @@ const projects = [
     gradient: 'from-purple-700 via-blue-700 to-indigo-800',
     accentColor: 'bg-purple-500',
     rating: 5,
+    preview: '/previews/creo.png',
   },
   {
     title: 'Coach Platform Template',
@@ -26,6 +27,7 @@ const projects = [
     gradient: 'from-emerald-700 via-teal-700 to-green-800',
     accentColor: 'bg-emerald-500',
     rating: 5,
+    preview: '/previews/coach.png',
   },
   {
     title: 'DSA Tracker Gamified',
@@ -38,6 +40,7 @@ const projects = [
     gradient: 'from-orange-700 via-red-700 to-rose-800',
     accentColor: 'bg-orange-500',
     rating: 5,
+    preview: '/previews/dsa-tracker.png',
   },
   {
     title: 'YouTube Analysis Tool',
@@ -50,6 +53,7 @@ const projects = [
     gradient: 'from-red-700 via-pink-700 to-rose-800',
     accentColor: 'bg-red-500',
     rating: 4,
+    preview: '/previews/youtube.png',
   },
 ];
 
@@ -160,21 +164,41 @@ export default function ProjectsPage() {
               transition={{ ...transition, duration: 0.3 }}
               className="h-full flex flex-col"
             >
-              {/* Cover art */}
-              <div className={`relative h-72 bg-gradient-to-br ${project.gradient} flex-shrink-0`}>
-                {/* Decorative pattern */}
-                <div
-                  className="absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage:
-                      'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)',
-                    backgroundSize: '60px 60px',
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
+              {/* Cover area — browser chrome + screenshot */}
+              <div className={`relative h-72 bg-gradient-to-br ${project.gradient} flex-shrink-0 flex flex-col`}>
+                {/* Browser chrome bar */}
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-black/50 backdrop-blur-sm border-b border-white/[0.08] flex-shrink-0 z-10">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                  </div>
+                  <div className="flex-1 bg-white/[0.08] rounded px-3 py-1 text-gray-400 font-mono text-[11px] truncate">
+                    {project.link.replace('https://', '')}
+                  </div>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lime-400 text-xs font-semibold hover:text-lime-300 transition-colors flex-shrink-0"
+                  >
+                    ↗ Live
+                  </a>
+                </div>
 
-                {/* Rating */}
-                <div className="absolute top-6 right-6 flex items-center gap-1">
+                {/* Screenshot */}
+                <div className="flex-1 overflow-hidden relative">
+                  <img
+                    src={project.preview}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  {/* Bottom fade into body */}
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-950 to-transparent pointer-events-none" />
+                </div>
+
+                {/* Stars */}
+                <div className="absolute top-12 right-6 flex items-center gap-1 z-10">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
@@ -183,19 +207,23 @@ export default function ProjectsPage() {
                     />
                   ))}
                 </div>
-
-                {/* Project number */}
-                <div className="absolute bottom-6 left-8">
-                  <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">
-                    Project {selected + 1} of {projects.length}
-                  </p>
-                  <h1 className="text-4xl font-bold text-white leading-tight">{project.title}</h1>
-                  <p className="text-lime-300 mt-1 text-sm">{project.subtitle}</p>
-                </div>
               </div>
 
               {/* Body */}
               <div className="flex-1 px-8 py-8 max-w-3xl">
+                {/* Project number + title (moved from cover) */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6"
+                >
+                  <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">
+                    Project {selected + 1} of {projects.length}
+                  </p>
+                  <h1 className="text-3xl font-bold text-white leading-tight mb-1">{project.title}</h1>
+                  <p className="text-lime-300 text-sm">{project.subtitle}</p>
+                </motion.div>
+
                 {/* Description */}
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
